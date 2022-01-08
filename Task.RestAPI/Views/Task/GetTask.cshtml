@@ -1,0 +1,56 @@
+﻿@model Tasks.Domain.Entities.Task
+
+@{
+    ViewData["Title"] = "GetById";
+}
+
+<h1>GetById</h1>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+    </dl>
+    <form method="post">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Is done</th>
+                <th>Delete</th>
+            </tr>
+             @foreach (var mission in Model.Missions)
+             {
+                <tr>
+                    <th>@mission.Name</th>
+                    <th>@mission.Description</th>
+                    <th>@mission.IsDone</th>
+                    <th>@Html.ActionLink("ChangeStatus", $"ChangeStatus/{mission.Id}", "Mission")</th>
+                    <th>@Html.ActionLink("Delete", $"Delete/{mission.Id}", "Mission")</th>
+                </tr>
+             }
+        </table>
+    </form>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>
